@@ -1,44 +1,27 @@
-from preprocess import sample_amazon_hf
+from preprocess import *
+from ml_model import *
+
 
 def main():
-    categories = [
-        "All_Beauty",
-        "Amazon_Fashion",
-        "Appliances",
-        "Arts_Crafts_and_Sewing",
-        "Automotive",
-        "Baby_Products",
-        "Beauty_and_Personal_Care",
-        "Books",
-        "CDs_and_Vinyl",
-        "Cell_Phones_and_Accessories",
-        "Clothing_Shoes_and_Jewelry",
-        "Digital_Music",
-        "Electronics",
-        "Gift_Cards",
-        "Grocery_and_Gourmet_Food",
-        "Handmade_Products",
-        "Health_and_Household",
-        "Health_and_Personal_Care",
-        "Home_and_Kitchen",
-        "Industrial_and_Scientific",
-        "Kindle_Store",
-        "Magazine_Subscriptions",
-        "Movies_and_TV",
-        "Musical_Instruments",
-        "Office_Products",
-        "Patio_Lawn_and_Garden",
-        "Pet_Supplies",
-        "Software",
-        "Sports_and_Outdoors",
-        "Subscription_Boxes",
-        "Tools_and_Home_Improvement",
-        "Toys_and_Games",
-        "Video_Games",
-        "Unknown"
-    ]
+    # STEP 1: preprocess
+    texts, labels = run_preprocess()
 
-    sample_amazon_hf(categories, k=2000)
+    # STEP 2: train
+    model, vectorizer = train_model(texts, labels)
+
+    # STEP 3: save
+    save_model(model, vectorizer)
+
+    # STEP 4 (optional): quick test
+    sample = ["This product is amazing", "Worst purchase ever"]
+    preds = predict(sample, model, vectorizer)
+
+    print("\nSample predictions:")
+    for text, pred in zip(sample, preds):
+        print(f"{text} -> {pred}")
+
+    
+
 
 if __name__ == "__main__":
     main()
