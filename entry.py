@@ -3,8 +3,9 @@ from ml_model import *
 
 
 def main():
-    # STEP 1: preprocess
-    texts, labels = run_preprocess()
+    # STEP 1: preprocess 
+    # set generate_dataset to TRUE when you are first generating the dataset files
+    texts, labels = run_preprocess(generate_dataset=False)
 
     # STEP 2: train
     model, vectorizer = train_model(texts, labels)
@@ -18,7 +19,7 @@ def main():
 
     print("\nSample predictions:")
     for text, pred in zip(sample, preds):
-        print(f"{text} -> {pred}")
+        print(f"{text} -> {decode_prediction(pred)}")
 
     
 

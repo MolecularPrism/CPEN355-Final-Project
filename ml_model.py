@@ -66,3 +66,6 @@ def predict(texts, model, vectorizer):
     X = vectorizer.transform(texts)  # IMPORTANT: transform, not fit_transform
     preds = model.predict(X)
     return preds
+
+def decode_prediction(pred):
+    return "Positive" if pred == 1 else "Negative"

@@ -92,7 +92,7 @@ def load_and_preprocess(data_dir="amazon_samples"):
 
     return texts, labels
 
-def run_preprocess():
+def run_preprocess(generate_dataset=True):
     categories = [
         "All_Beauty", "Amazon_Fashion", "Appliances",
         "Arts_Crafts_and_Sewing", "Automotive", "Baby_Products",
@@ -111,7 +111,8 @@ def run_preprocess():
     ]
 
     # STEP 1: Sample dataset
-    sample_amazon_hf(categories, k=2000)
+    if(generate_dataset):
+        sample_amazon_hf(categories, k=2000)
 
     # STEP 2: Load + preprocess
     texts, labels = load_and_preprocess()
