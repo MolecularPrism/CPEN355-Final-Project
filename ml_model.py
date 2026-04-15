@@ -120,7 +120,11 @@ def train_model(texts, labels, train_iter=1000, model_option=3):
             "distilbert-base-uncased", num_labels=2
         )
 
-        device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
+        device = torch.device(
+            "cuda" if torch.cuda.is_available()
+            else "mps" if torch.backends.mps.is_available()
+            else "cpu"
+        )
         model.to(device)
         print("Using device:", device)
 
@@ -200,7 +204,11 @@ def train_model(texts, labels, train_iter=1000, model_option=3):
         test_loader  = DataLoader(test_dataset, batch_size=32)
 
 
-        device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
+        device = torch.device(
+            "cuda" if torch.cuda.is_available()
+            else "mps" if torch.backends.mps.is_available()
+            else "cpu"
+        )
         model = LSTMClassifier(len(vocab)).to(device)
 
         criterion = nn.CrossEntropyLoss()
@@ -312,7 +320,11 @@ def predict(texts, model, vectorizer):
             return_tensors="pt"
         )
 
-        device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
+        device = torch.device(
+            "cuda" if torch.cuda.is_available()
+            else "mps" if torch.backends.mps.is_available()
+            else "cpu"
+        )
         encodings = {k: v.to(device) for k, v in encodings.items()}
         model.to(device)
 
@@ -333,7 +345,11 @@ def predict(texts, model, vectorizer):
 
         X = torch.tensor([encode(t) for t in texts], dtype=torch.long)
 
-        device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
+        device = torch.device(
+            "cuda" if torch.cuda.is_available()
+            else "mps" if torch.backends.mps.is_available()
+            else "cpu"
+        )
         model.to(device)
         X = X.to(device)
 
