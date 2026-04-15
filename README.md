@@ -19,10 +19,9 @@ uv pip install -r requirements.txt
 ### 4. Run the pipeline
 python entry.py
 
-### ✅ Verify environment (important)
+### Verify environment (important)
 which python
 
 Expected:
 .../.venv/bin/python
 
-If you see anaconda → wrong environment ❌

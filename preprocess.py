@@ -4,9 +4,8 @@ import os
 import re
 from sklearn.feature_extraction.text import TfidfVectorizer
 
-# -----------------------
-# 1. DATA SAMPLING
-# -----------------------
+
+# DATA SAMPLING
 def sample_amazon_hf(categories, output_dir="amazon_samples", k=2000):
     os.makedirs(output_dir, exist_ok=True)
 
@@ -43,9 +42,7 @@ def sample_amazon_hf(categories, output_dir="amazon_samples", k=2000):
     print("\nDataset File Creation Complete!")
 
 
-# -----------------------
-# 2. LABELING
-# -----------------------
+# LABELING
 def label_from_rating(rating):
     if rating >= 4:
         return 1
@@ -55,9 +52,7 @@ def label_from_rating(rating):
         return None
 
 
-# -----------------------
-# 3. CLEAN TEXT
-# -----------------------
+# CLEAN TEXT
 def clean_text(text):
     text = text.lower()
     text = re.sub(r"http\S+", "", text)
@@ -66,9 +61,8 @@ def clean_text(text):
     return text
 
 
-# -----------------------
-# 4. LOAD + PREPROCESS
-# -----------------------
+
+# LOAD + PREPROCESS
 def load_and_preprocess(data_dir="amazon_samples"):
     texts = []
     labels = []
@@ -110,11 +104,11 @@ def run_preprocess(generate_dataset=True):
         "Video_Games", "Unknown"
     ]
 
-    # STEP 1: Sample dataset
+    # Sample dataset
     if(generate_dataset):
         sample_amazon_hf(categories, k=2000)
 
-    # STEP 2: Load + preprocess
+    #Load + preprocess
     texts, labels = load_and_preprocess()
 
     return texts, labels
