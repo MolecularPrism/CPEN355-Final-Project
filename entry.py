@@ -3,7 +3,7 @@ from ml_model import *
 from plot import plot_model_results, plot_lstm_loss, plot_confusion_matrix
 
 def main():
-    texts, labels = run_preprocess(generate_dataset=False)
+    texts, labels = run_preprocess(generate_dataset=True)
 
     results = []
 
